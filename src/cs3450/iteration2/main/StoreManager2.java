@@ -28,7 +28,7 @@ public class StoreManager2  extends JFrame implements ActionListener, MouseListe
 	private CardLayout cl;
 	
 	public StoreManager2(){
-		global.usersDatabase = databaseHandler.connect("SQL", "placeholderaddress", "placeholderusername", "placeholderpassword");
+		global.database = databaseHandler.connect("SQL", "placeholderaddress", "placeholderusername", "placeholderpassword");
 		
 		this.setTitle("StoreManager");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
