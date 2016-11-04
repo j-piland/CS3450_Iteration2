@@ -12,16 +12,16 @@ public class DatabaseHandler implements DatabaseReader {
 		
 		if(databaseType.equalsIgnoreCase("sql")){
 			databaseAdapter = new DatabaseAdapter("sql");
-			databaseAdapter.connect(databaseType, tableAddress, username, password);
+			return databaseAdapter.connect(databaseType, tableAddress, username, password);
 		}
 		return null;
 	}
 
 	@Override
-	public User getUser(String databaseType, Connection db, String username) {
+	public User getUser(String databaseType, Connection db, String username, String ID) {
 		if(databaseType.equalsIgnoreCase("sql")){
 			databaseAdapter = new DatabaseAdapter("sql");
-			databaseAdapter.getUser(databaseType, db, username);
+			return databaseAdapter.getUser(databaseType, db, username, ID);
 		}
 		return null;
 	}

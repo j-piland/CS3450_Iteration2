@@ -23,9 +23,9 @@ public class DatabaseAdapter implements DatabaseReader {
 	}
 
 	@Override
-	public User getUser(String databaseType, Connection db, String username) {
+	public User getUser(String databaseType, Connection db, String username, String ID) {
 		if(databaseType.equalsIgnoreCase("sql")){
-			return advDatabaseReader.getUserSQL(databaseType, db, username);
+			return advDatabaseReader.getUserSQL(databaseType, db, username, ID);
 		}
 		return null;
 	}
