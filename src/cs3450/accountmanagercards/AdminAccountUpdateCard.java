@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import cs3450.cardfunctions.AccountFunctions;
+
 public class AdminAccountUpdateCard extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
@@ -56,6 +58,8 @@ public class AdminAccountUpdateCard extends JPanel{
 	private JPanel bottomBar;
 	private JButton AUupdateButton;
 	private JButton AUbackButton;
+	
+	private AccountFunctions accountFunctions = new AccountFunctions();
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public AdminAccountUpdateCard(){
@@ -166,5 +170,47 @@ public class AdminAccountUpdateCard extends JPanel{
 		return cbPassword;
 	}
 	
+	public String getTID(){
+		return tID.getText();
+	}
 	
+	public String getTName(){
+		return tName.getText();
+	}
+	
+	public String getTPhone(){
+		return tPhone.getText();
+	}
+	
+	public String getTAddress(){
+		return tAddress.getText();
+	}
+	
+	public String getTUsername(){
+		return tUser.getText();
+	}
+	
+	public String getTPassword(){
+		return tPassword.getText();
+	}
+	
+	public CheckboxGroup getcbg(){
+		return cbg;
+	}
+	
+	public Checkbox getAdmin(){
+		return AUadmin;
+	}
+	
+	public Checkbox getClerk(){
+		return AUclerk;
+	}
+	
+	public int getAUbox(){
+		return accountOptions.getSelectedIndex();
+	}
+	
+	public void updateUser(){
+		accountFunctions.updateUser(this);
+	}
 }
