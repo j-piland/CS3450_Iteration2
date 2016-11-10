@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import cs3450.cardfunctions.AccountFunctions;
 import cs3450.resources.User;
 
 public class AdminAccountNewCard extends JPanel{
@@ -53,6 +54,8 @@ public class AdminAccountNewCard extends JPanel{
 	private JPanel bottomBar;
 	private JButton ADaddButton;
 	private JButton ADbackButton;
+	
+	private AccountFunctions accountFunctions = new AccountFunctions();
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public AdminAccountNewCard(){
@@ -132,7 +135,11 @@ public class AdminAccountNewCard extends JPanel{
 		return ADaddButton;
 	}
 	
-	public User getNewUser(){
+	public int getADbox(){
+		return accountOptions.getSelectedIndex();
+	}
+	
+	public void addNewUser(){
 		User temp = new User();
 		Boolean procede = false;
 		
@@ -147,7 +154,7 @@ public class AdminAccountNewCard extends JPanel{
 			
 		if(!procede){
 			JOptionPane.showMessageDialog(null, "Please Fill in All Fields.", "Alert", JOptionPane.ERROR_MESSAGE);
-			return null;
+			return;
 		}
 		
 		temp.ID = tID.getText();
@@ -163,6 +170,9 @@ public class AdminAccountNewCard extends JPanel{
 			temp.status = "Clerk";
 		}
 		
-		return temp;
+		JOptionPane.showMessageDialog(null, "User Added!", "Alert", JOptionPane.INFORMATION_MESSAGE);
+		
+		
+		accountFunctions.addUser(temp);
 	}
 }

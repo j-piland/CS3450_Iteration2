@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
+
+import javax.swing.JOptionPane;
 
 import cs3450.resources.Global;
 import cs3450.resources.User;
@@ -95,7 +98,80 @@ public class SQLReader implements AdvDatabaseReader{
 		return toReturn;
 	}
 	
+	public Vector<User> getAllUsersSQL(String databaseType, Connection db){		
+		Vector<User> toReturn = new Vector<User>();
+		User temp = new User();
+		
+		try{			
+			Statement st = db.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM users");
+			
+			if (rs.next()){
+				do{
+					temp.ID =				rs.getString(STOREID);
+					temp.username =			rs.getString(USERNAME);
+					temp.status =			rs.getString(STATUS);
+					temp.name = 			rs.getString(NAME);
+					temp.address = 			rs.getString(ADDRESS);
+					temp.phone = 			rs.getString(PHONE);
+					temp.currentPassword = 	rs.getString(CURRENTPASSWORD);
+				
+					toReturn.addElement(temp);
+				}while(rs.next());
+			}else{
+				System.out.println("No users in database.");
+			}
+			
+		}catch(SQLException e){
+			System.out.println("get User exception");
+			e.printStackTrace();
+		}
+		
+		return toReturn;
+	}
 	
+	public Vector<User> deleteUserByID(String databaseType, Connection db, String ID){
+		Vector<User> toReturn = new Vector<User>();
+		
+		try {
+			db.setAutoCommit(false);
+			
+			Statement st = db.createStatement();
+			
+			if((JOptionPane.showConfirmDialog(null, "Are you sure you want to delete user: " + ID + "?", "Delete Warning", JOptionPane.OK_CANCEL_OPTION))==JOptionPane.OK_OPTION){
+				st.executeUpdate("DELETE FROM users * WHERE storeid = \'" + ID +"\'");
+				db.commit();
+				JOptionPane.showMessageDialog(null, "User has been deleted", "User Deleted", JOptionPane.WARNING_MESSAGE);
+				//st.executeUpdate("DELETE FROM passwords * WHERE name = \'" + ID + "\'");
+				//db.commit();
+			}
+			
+			toReturn = getAllUsersSQL(databaseType, db);
+			
+			db.setAutoCommit(true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return toReturn;
+	}
 	
+	public void addUserSQL(String databaseType, Connection db, User toAdd){
+		String searcher = "INSERT INTO userinfo (id, username, status, name, address, phone, currentpassword) VALUES (\'" + toAdd.ID
+				+ "\', \'" + toAdd.username + "\', \'" + toAdd.status + "\', \'" +
+				toAdd.name + "\', \'" + toAdd.address + "\', \'" + toAdd.phone + "\', \'" + toAdd.currentPassword + "\')";
+		try {
+			db.setAutoCommit(false);
+	
+			Statement st = db.createStatement();
+			System.out.println(searcher);
+			st.executeUpdate(searcher);
+			db.commit();
+			
+			db.setAutoCommit(true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

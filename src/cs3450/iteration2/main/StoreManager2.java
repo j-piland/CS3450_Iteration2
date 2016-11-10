@@ -248,12 +248,61 @@ public class StoreManager2  extends JFrame implements ActionListener, MouseListe
 		
 		//Admin Account Functions
 		if(e.getSource()==adminAccountDisplayCard.getAMbackButton()){
-			
+			cl.show(deck, "adminMainMenuCard");
 		}
 		
 		if(e.getSource()==adminAccountDisplayCard.getAMexecute()){
-			
+			if(adminAccountDisplayCard.getAMbox()==UPDATE){
+				adminAccountUpdateCard.setAUbox(adminAccountDisplayCard.getAMbox());
+				adminAccountUpdateCard.setAUsearch(adminAccountDisplayCard.getAMsearch());
+				cl.show(deck, "adminAccountUpdateCard");
+			}else if(adminAccountDisplayCard.getAMbox()==ADD){
+				adminAccountNewCard.setADbox(adminAccountDisplayCard.getAMbox());
+				adminAccountNewCard.setADsearch(adminAccountDisplayCard.getAMsearch());
+				cl.show(deck, "adminAccountNewCard");
+			}else{
+				adminAccountDisplayCard.display();
+			}
 		}
+		
+		if(e.getSource()==adminAccountNewCard.getADexecuteButton()){
+			if(adminAccountNewCard.getADbox()==UPDATE){
+				adminAccountUpdateCard.setAUbox(adminAccountNewCard.getADbox());
+				adminAccountUpdateCard.setAUsearch(adminAccountNewCard.getADsearch());
+				cl.show(deck, "adminAccountUpdateCard");
+			}else if(adminAccountNewCard.getADbox()==ADD){
+				adminAccountNewCard.addNewUser();
+			}else{
+				adminAccountDisplayCard.setAMbox(adminAccountNewCard.getADbox());
+				adminAccountDisplayCard.setAMsearch(adminAccountNewCard.getADsearch());
+				cl.show(deck, "adminAccountDisplayCard");
+				adminAccountDisplayCard.display();
+			}
+		}
+		
+		if(e.getSource()==adminAccountNewCard.getADaddButton()){
+			adminAccountNewCard.addNewUser();
+		}
+		
+		if(e.getSource()==adminAccountUpdateCard.getAUexecuteButton()){
+			if(adminAccountUpdateCard.getAUbox()==UPDATE){
+				adminAccountUpdateCard.updateUser();
+			}else if(adminAccountUpdateCard.getAUbox()==ADD){
+				adminAccountNewCard.setADbox(adminAccountUpdateCard.getAUbox());
+				adminAccountNewCard.setADsearch(adminAccountUpdateCard.getAUsearch());
+				cl.show(deck, "adminAccountNewCard");
+			}else{
+				adminAccountDisplayCard.setAMbox(adminAccountUpdateCard.getAUbox());
+				adminAccountDisplayCard.setAMsearch(adminAccountUpdateCard.getAUsearch());
+				cl.show(deck, "adminAccountDisplayCard");
+				adminAccountDisplayCard.display();
+			}
+		}
+		
+		if(e.getSource()==adminAccountUpdateCard.getAUupdateButton()){
+			adminAccountUpdateCard.updateUser();
+		}
+		
 	}
 	
 	

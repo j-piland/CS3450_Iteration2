@@ -11,6 +11,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import cs3450.cardfunctions.AccountFunctions;
+
 public class AdminAccountDisplayCard extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
@@ -29,11 +31,20 @@ public class AdminAccountDisplayCard extends JPanel {
 	private JButton AMbackButton;
 	private JPanel bottomBar;
 	
+	private AccountFunctions accountFunctions = new AccountFunctions();
+	
+	private static final int VIEWALL = 0;
+	private static final int SEARCHBYID = 1;
+	private static final int SEARCHBYNAME = 2;
+	private static final int ADD = 3;
+	private static final int UPDATE = 4;
+	private static final int DELETE = 5;
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public AdminAccountDisplayCard(){
 		this.setLayout(new BorderLayout());
 		
-		optionsList = new String [] {"View All", "Search by ID", "Search by Name", "Add", "Update", "Delete"};
+		optionsList = new String [] {"View All", "Search by ID", "Search by Name", "Add", "Update", "Delete by ID"};
 		
 		buttonGrid = new JPanel();
 		buttonGrid.setLayout(new GridLayout(1,4));
@@ -82,5 +93,25 @@ public class AdminAccountDisplayCard extends JPanel {
 	
 	public void setAMsearch(String t){
 		AMsearch.setText(t);
+	}
+	
+	public int getAMbox(){
+		return accountOptions.getSelectedIndex();
+	}
+	
+	public void display(){
+		display.setText("");
+		if(accountOptions.getSelectedIndex()==VIEWALL){
+			display.setText(accountFunctions.getAllUsers());
+		}
+		if(accountOptions.getSelectedIndex()==SEARCHBYID){
+			display.setText(accountFunctions.getByID(AMsearch.getText()));
+		}
+		if(accountOptions.getSelectedIndex()==SEARCHBYNAME){
+			display.setText(accountFunctions.getByName(AMsearch.getText()));
+		}
+		if(accountOptions.getSelectedIndex()==DELETE){
+			display.setText(accountFunctions.deleteByID(AMsearch.getText()));
+		}
 	}
 }
