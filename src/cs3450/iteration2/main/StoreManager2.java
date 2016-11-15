@@ -28,46 +28,60 @@ import cs3450.login.LoginFunctions;
 import cs3450.resources.Global;
 import cs3450.resources.User;
 import cs3450.welcomescreen.WelcomeCard;
+import historycards.HistoryManager;
+import inventorycards.InventoryAddCard;
+import inventorycards.InventoryManager;
+import inventorycards.InventoryUpdateCard;
 
 @SuppressWarnings("serial")
-public class StoreManager2  extends JFrame implements ActionListener, MouseListener, ItemListener{
-	//"View All", "Search by ID", "Search by Name", "Add", "Update", "Delete"
+public class StoreManager2 extends JFrame implements ActionListener, MouseListener, ItemListener {
+	// "View All", "Search by ID", "Search by Name", "Add", "Update", "Delete"
 	private static final int VIEWALL = 0;
 	private static final int SEARCHBYID = 1;
 	private static final int SEARCHBYNAME = 2;
 	private static final int ADD = 3;
 	private static final int UPDATE = 4;
 	private static final int DELETE = 5;
-	
+
 	public Global global = new Global();
 	private DatabaseHandler databaseHandler = new DatabaseHandler();
-	
+
 	private Container pane;
 	private JPanel deck;
 	private CardLayout cl;
-	
+
 	private WelcomeCard welcomeCard = new WelcomeCard();
 	private LoginCard loginCard = new LoginCard();
 	private AdminMainMenuCard adminMainMenuCard = new AdminMainMenuCard();
 	private ClerkMainMenuCard clerkMainMenuCard = new ClerkMainMenuCard();
 	private AdminCheckoutCard adminCheckoutCard = new AdminCheckoutCard();
 	private ClerkCheckoutMenu clerkCheckoutCard = new ClerkCheckoutMenu();
+<<<<<<< HEAD
 	private ClerkUpdateMenuCard	clerkUpdateMenuCard = new ClerkUpdateMenuCard();
 	
+=======
+
+>>>>>>> origin/master
 	private AdminAccountDisplayCard adminAccountDisplayCard = new AdminAccountDisplayCard();
 	private AdminAccountNewCard adminAccountNewCard = new AdminAccountNewCard();
 	private AdminAccountUpdateCard adminAccountUpdateCard = new AdminAccountUpdateCard();
-	
+
+	private InventoryManager inventoryDisplayCard = new InventoryManager();
+	private InventoryAddCard inventoryAddCard = new InventoryAddCard();
+	private InventoryUpdateCard inventoryUpdateCard = new InventoryUpdateCard();
+
+	private HistoryManager historyDisplayCard = new HistoryManager();
+
 	private LoginFunctions loginFunctions;
-	
+
 	@SuppressWarnings("static-access")
-	public StoreManager2(){
-		
+	public StoreManager2() {
+
 		global.database = databaseHandler.connect("SQL", "jdbc:postgresql:iteration_2", "postgres", "123");
-		
+
 		global.currentUser = new User();
 		global.currentUser.status = "none";
-		
+
 		this.setTitle("StoreManager");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
@@ -75,25 +89,22 @@ public class StoreManager2  extends JFrame implements ActionListener, MouseListe
 		pane.setLayout(new BorderLayout());
 		pane.setPreferredSize(new Dimension(640, 480));
 		deck = new JPanel(new CardLayout());
-		
-		
+
 		/**
-		 * How to add a card
-		 * card = new Card();
-		 * card.buttonOrWhatever.addActionListener(this);
-		 * deck.add(card, "StringName")
+		 * How to add a card card = new Card();
+		 * card.buttonOrWhatever.addActionListener(this); deck.add(card,
+		 * "StringName")
 		 */
-		
+
 		welcomeCard.getWExitButton().addActionListener(this);
 		welcomeCard.getWLoginButton().addActionListener(this);
 		deck.add(welcomeCard, "welcome");
-		
+
 		loginCard.getLExitButton().addActionListener(this);
 		loginCard.getLAcceptButton().addActionListener(this);
 		deck.add(loginCard, "login");
 		loginFunctions = new LoginFunctions();
-		
-		
+
 		adminMainMenuCard.getAAaccountButton().addActionListener(this);
 		adminMainMenuCard.getAAcheckoutButton().addActionListener(this);
 		adminMainMenuCard.getAAinventoryButton().addActionListener(this);
@@ -101,157 +112,199 @@ public class StoreManager2  extends JFrame implements ActionListener, MouseListe
 		adminMainMenuCard.getAAlogoutButton().addActionListener(this);
 		adminMainMenuCard.getAAexitButton().addActionListener(this);
 		deck.add(adminMainMenuCard, "adminMainMenuCard");
-		
+
 		clerkMainMenuCard.getCMcheckoutButton().addActionListener(this);
 		clerkMainMenuCard.getCMupdateButton().addActionListener(this);
 		clerkMainMenuCard.getCMlogoutButton().addActionListener(this);
 		clerkMainMenuCard.getCMexitButton().addActionListener(this);
 		deck.add(clerkMainMenuCard, "clerkMainMenuCard");
-		
+
 		adminCheckoutCard.getACaddItemButton().addActionListener(this);
 		adminCheckoutCard.getACbackButton().addActionListener(this);
 		adminCheckoutCard.getAClogoutButton().addActionListener(this);
 		adminCheckoutCard.getACremoveItemButton().addActionListener(this);
 		adminCheckoutCard.getACprintReceiptButton().addActionListener(this);
 		deck.add(adminCheckoutCard, "adminCheckoutCard");
-		
+
 		clerkCheckoutCard.getCCaddItemButton().addActionListener(this);
 		clerkCheckoutCard.getCCremoveItemButton().addActionListener(this);
 		clerkCheckoutCard.getCCprintReceiptButton().addActionListener(this);
 		clerkCheckoutCard.getCClogoutButton().addActionListener(this);
 		clerkCheckoutCard.getCCbackButton().addActionListener(this);
 		deck.add(clerkCheckoutCard, "clerkCheckoutCard");
+<<<<<<< HEAD
 		
 		clerkUpdateMenuCard.getCUupdateButton().addActionListener(this);
 		clerkUpdateMenuCard.getCUbackButton().addActionListener(this);
 		clerkUpdateMenuCard.getCUlogoutButton().addActionListener(this);
 		deck.add(clerkUpdateMenuCard, "clerkUpdateMenuCard");
 		
+=======
+
+>>>>>>> origin/master
 		adminAccountDisplayCard.getAMbackButton().addActionListener(this);
 		adminAccountDisplayCard.getAMexecute().addActionListener(this);
 		deck.add(adminAccountDisplayCard, "adminAccountDisplayCard");
-		
+
 		adminAccountNewCard.getADaddButton().addActionListener(this);
 		adminAccountNewCard.getADbackButton().addActionListener(this);
 		adminAccountNewCard.getADexecuteButton().addActionListener(this);
 		deck.add(adminAccountNewCard, "adminAccountNewCard");
-		
+
 		adminAccountUpdateCard.getAUbackButton().addActionListener(this);
 		adminAccountUpdateCard.getAUexecuteButton().addActionListener(this);
 		adminAccountUpdateCard.getAUupdateButton().addActionListener(this);
 		deck.add(adminAccountUpdateCard, "adminAccountUpdateCard");
-		
+
+		inventoryDisplayCard.getIMbackButton().addActionListener(this);
+		inventoryDisplayCard.getexecuteBtn().addActionListener(this);
+		deck.add(inventoryDisplayCard, "inventoryDisplayCard");
+
+		inventoryUpdateCard.getAUexecuteButton().addActionListener(this);
+		inventoryUpdateCard.getAUbackButton().addActionListener(this);
+		inventoryUpdateCard.getAUupdateButton().addActionListener(this);
+		deck.add(inventoryUpdateCard, "inventoryUpdateCard");
+
+		inventoryAddCard.getADaddButton().addActionListener(this);
+		inventoryAddCard.getADbackButton().addActionListener(this);
+		inventoryAddCard.getADexecuteButton().addActionListener(this);
+		deck.add(inventoryAddCard, "inventoryAddCard");
+
+		historyDisplayCard.getHMbackButton().addActionListener(this);
+		historyDisplayCard.getexecuteBtn().addActionListener(this);
+		deck.add(historyDisplayCard, "historyDisplayCard");
+
 		pane.add(deck, BorderLayout.CENTER);
-		cl= (CardLayout)(deck.getLayout());
+		cl = (CardLayout) (deck.getLayout());
 		cl.show(deck, "Welcome");
-		
+
 		this.pack();
-		this.setLocationRelativeTo(null);	
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
-	
+
 	public static void main(String[] args) {
 		new StoreManager2();
 	}
 
-	
-	
-	
-	
-	
-	
 	@SuppressWarnings("static-access")
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//The Various Exit Buttons
-		if(e.getSource()==welcomeCard.getWExitButton() || e.getSource()==loginCard.getLExitButton()
-				|| e.getSource()==clerkMainMenuCard.getCMexitButton() || e.getSource()==adminMainMenuCard.getAAexitButton()){
+		// The Various Exit Buttons
+		if (e.getSource() == welcomeCard.getWExitButton() || e.getSource() == loginCard.getLExitButton()
+				|| e.getSource() == clerkMainMenuCard.getCMexitButton()
+				|| e.getSource() == adminMainMenuCard.getAAexitButton()) {
 			System.exit(0);
 		}
-		
-		//Welcome Card Login
-		if(e.getSource()==welcomeCard.getWLoginButton()){
+
+		// Welcome Card Login
+		if (e.getSource() == welcomeCard.getWLoginButton()) {
 			cl.show(deck, "login");
 		}
-		
-		//Attempt to login
-		if(e.getSource()==loginCard.getLAcceptButton()){
-			
+
+		// Attempt to login
+		if (e.getSource() == loginCard.getLAcceptButton()) {
+
 			loginFunctions.attemptLogin(loginCard.getUsername(), loginCard.getPassword());
-		
-			if(global.currentUser.status.equalsIgnoreCase("none")){
-				
-			}else if(global.currentUser.status.equalsIgnoreCase("admin")){
+
+			if (global.currentUser.status.equalsIgnoreCase("none")) {
+
+			} else if (global.currentUser.status.equalsIgnoreCase("admin")) {
 				cl.show(deck, "adminMainMenuCard");
-			}else if(global.currentUser.status.equalsIgnoreCase("clerk")){
+			} else if (global.currentUser.status.equalsIgnoreCase("clerk")) {
 				cl.show(deck, "clerkMainMenuCard");
 			}
 		}
-		
-		//Admin menu functions
-		if(e.getSource()==adminMainMenuCard.getAAcheckoutButton()){
+
+		// Admin menu functions
+		if (e.getSource() == adminMainMenuCard.getAAcheckoutButton()) {
 			cl.show(deck, "adminCheckoutCard");
 		}
-		
-		if(e.getSource()==adminMainMenuCard.getAAaccountButton()){
+
+		if (e.getSource() == adminMainMenuCard.getAAaccountButton()) {
 			adminAccountDisplayCard.setAMbox(VIEWALL);
 			adminAccountDisplayCard.setAMsearch("");
 			cl.show(deck, "adminAccountDisplayCard");
 		}
-		if(e.getSource()==adminMainMenuCard.getAAhistoryButton()){
-			
+		if (e.getSource() == adminMainMenuCard.getAAhistoryButton()) {
+			cl.show(deck, "historyDisplayCard");
 		}
-		if(e.getSource()==adminMainMenuCard.getAAinventoryButton()){
-			
+		if (e.getSource() == adminMainMenuCard.getAAinventoryButton()) {
+			cl.show(deck, "inventoryDisplayCard");
 		}
-		if(e.getSource()==adminMainMenuCard.getAAlogoutButton()){
+		if (e.getSource() == adminMainMenuCard.getAAlogoutButton()) {
 			cl.show(deck, "login");
 		}
-		
-		//Clerk menu functions
-		if(e.getSource()==clerkMainMenuCard.getCMcheckoutButton()){
+
+		// Clerk menu functions
+		if (e.getSource() == clerkMainMenuCard.getCMcheckoutButton()) {
 			cl.show(deck, "clerkCheckoutCard");
 		}
-		if(e.getSource()==clerkMainMenuCard.getCMupdateButton()){
-			
+		if (e.getSource() == clerkMainMenuCard.getCMupdateButton()) {
+
 		}
-		if(e.getSource()==clerkMainMenuCard.getCMlogoutButton()){
+		if (e.getSource() == clerkMainMenuCard.getCMlogoutButton()) {
 			cl.show(deck, "login");
 		}
-		
-		//Admin Checkout Functions
-		if(e.getSource()==adminCheckoutCard.getACaddItemButton()){
-			
+
+		// Admin Checkout Functions
+		if (e.getSource() == adminCheckoutCard.getACaddItemButton()) {
+
 		}
-		if(e.getSource()==adminCheckoutCard.getACremoveItemButton()){
-			
+		if (e.getSource() == adminCheckoutCard.getACremoveItemButton()) {
+
 		}
-		if(e.getSource()==adminCheckoutCard.getACprintReceiptButton()){
-			
+		if (e.getSource() == adminCheckoutCard.getACprintReceiptButton()) {
+
 		}
-		if(e.getSource()==adminCheckoutCard.getAClogoutButton()){
+		if (e.getSource() == adminCheckoutCard.getAClogoutButton()) {
 			cl.show(deck, "login");
 		}
-		if(e.getSource()==adminCheckoutCard.getACbackButton()){
+		if (e.getSource() == adminCheckoutCard.getACbackButton()) {
 			cl.show(deck, "adminMainMenuCard");
 		}
-		
-		//Clerk Checkout Functions
-		if(e.getSource()==clerkCheckoutCard.getCCaddItemButton()){
-			
+
+		// Clerk Checkout Functions
+		if (e.getSource() == clerkCheckoutCard.getCCaddItemButton()) {
+
 		}
-		if(e.getSource()==clerkCheckoutCard.getCCremoveItemButton()){
-			
+		if (e.getSource() == clerkCheckoutCard.getCCremoveItemButton()) {
+
 		}
-		if(e.getSource()==clerkCheckoutCard.getCCprintReceiptButton()){
-			
+		if (e.getSource() == clerkCheckoutCard.getCCprintReceiptButton()) {
+
 		}
-		if(e.getSource()==clerkCheckoutCard.getCCbackButton()){
+		if (e.getSource() == clerkCheckoutCard.getCCbackButton()) {
 			cl.show(deck, "clerkMainMenuCard");
 		}
-		if(e.getSource()==clerkCheckoutCard.getCClogoutButton()){
+		if (e.getSource() == clerkCheckoutCard.getCClogoutButton()) {
 			cl.show(deck, "login");
 		}
+<<<<<<< HEAD
+
+		// Admin Account Functions
+		if (e.getSource() == adminAccountDisplayCard.getAMbackButton()) {
+
+		}
+
+		if (e.getSource() == adminAccountDisplayCard.getAMexecute()) {
+
+		}
+
+		if (e.getSource() == inventoryDisplayCard.getIMbackButton()) {
+			cl.show(deck, "adminMainMenuCard");
+		}
+
+		if (e.getSource() == inventoryDisplayCard.getexecuteBtn()) {
+			int execReturn = inventoryDisplayCard.execute();
+			if (execReturn == 1) { // add
+				cl.show(deck, "inventoryAddCard");
+			} else if (execReturn == 2) { // update
+				cl.show(deck, "inventoryUpdateCard");
+			}
+		}
+
+=======
 		
 		//Admin Account Functions
 		if(e.getSource()==adminAccountDisplayCard.getAMbackButton()){
@@ -310,6 +363,7 @@ public class StoreManager2  extends JFrame implements ActionListener, MouseListe
 			adminAccountUpdateCard.updateUser();
 		}
 		
+<<<<<<< HEAD
 		//Clerk Update Menu
 		if(e.getSource()==clerkUpdateMenuCard.getCUbackButton()){
 			cl.show(deck, "clerkMainMenuCard");
@@ -323,48 +377,45 @@ public class StoreManager2  extends JFrame implements ActionListener, MouseListe
 			clerkUpdateMenuCard.changePassword();
 		}
 		
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
 	}
-	
-	
-	
-	
-	
+
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
-	}
 
-	
+	}
 
 }
