@@ -29,7 +29,7 @@ public class ClerkMainMenuCard extends JPanel {
 		buttonGrid = new JPanel();
 		buttonGrid.setLayout(new GridLayout(2,1));
 		CMcheckoutButton = new JButton("Checkout");
-		CMupdateButton = new JButton("Update Information");
+		CMupdateButton = new JButton("Change Password");
 		buttonGrid.add(CMcheckoutButton);
 		buttonGrid.add(CMupdateButton);
 		

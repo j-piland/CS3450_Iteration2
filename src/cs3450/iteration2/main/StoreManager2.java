@@ -21,6 +21,7 @@ import cs3450.adminmenus.AdminCheckoutCard;
 import cs3450.adminmenus.AdminMainMenuCard;
 import cs3450.clerkmenus.ClerkCheckoutMenu;
 import cs3450.clerkmenus.ClerkMainMenuCard;
+import cs3450.clerkmenus.ClerkUpdateMenuCard;
 import cs3450.databases.DatabaseHandler;
 import cs3450.login.LoginCard;
 import cs3450.login.LoginFunctions;
@@ -51,6 +52,7 @@ public class StoreManager2  extends JFrame implements ActionListener, MouseListe
 	private ClerkMainMenuCard clerkMainMenuCard = new ClerkMainMenuCard();
 	private AdminCheckoutCard adminCheckoutCard = new AdminCheckoutCard();
 	private ClerkCheckoutMenu clerkCheckoutCard = new ClerkCheckoutMenu();
+	private ClerkUpdateMenuCard	clerkUpdateMenuCard = new ClerkUpdateMenuCard();
 	
 	private AdminAccountDisplayCard adminAccountDisplayCard = new AdminAccountDisplayCard();
 	private AdminAccountNewCard adminAccountNewCard = new AdminAccountNewCard();
@@ -119,6 +121,11 @@ public class StoreManager2  extends JFrame implements ActionListener, MouseListe
 		clerkCheckoutCard.getCClogoutButton().addActionListener(this);
 		clerkCheckoutCard.getCCbackButton().addActionListener(this);
 		deck.add(clerkCheckoutCard, "clerkCheckoutCard");
+		
+		clerkUpdateMenuCard.getCUupdateButton().addActionListener(this);
+		clerkUpdateMenuCard.getCUbackButton().addActionListener(this);
+		clerkUpdateMenuCard.getCUlogoutButton().addActionListener(this);
+		deck.add(clerkUpdateMenuCard, "clerkUpdateMenuCard");
 		
 		adminAccountDisplayCard.getAMbackButton().addActionListener(this);
 		adminAccountDisplayCard.getAMexecute().addActionListener(this);
@@ -301,6 +308,19 @@ public class StoreManager2  extends JFrame implements ActionListener, MouseListe
 		
 		if(e.getSource()==adminAccountUpdateCard.getAUupdateButton()){
 			adminAccountUpdateCard.updateUser();
+		}
+		
+		//Clerk Update Menu
+		if(e.getSource()==clerkUpdateMenuCard.getCUbackButton()){
+			cl.show(deck, "clerkMainMenuCard");
+		}
+		
+		if(e.getSource()==clerkUpdateMenuCard.getCUlogoutButton()){
+			cl.show(deck, "login");
+		}
+		
+		if(e.getSource()==clerkUpdateMenuCard.getCUupdateButton()){
+			clerkUpdateMenuCard.changePassword();
 		}
 		
 	}
