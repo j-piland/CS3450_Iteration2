@@ -10,6 +10,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 
 import cs3450.resources.Global;
+import cs3450.resources.Item;
 import cs3450.resources.User;
 
 public class SQLReader implements AdvDatabaseReader{
@@ -172,6 +173,34 @@ public class SQLReader implements AdvDatabaseReader{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public Item getItemSQL(String databaseType, Connection db, int productID){
+		Item toReturn = new Item();
+		
+		try{
+			Statement st = db.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM Inventory WHERE productID = " + productID);
+			
+			if(rs.next()){
+				toReturn.productID = rs.getInt(1);
+				toReturn.name = rs.getString(2);
+				toReturn.buyPrice = rs.getDouble(3);
+				toReturn.sellPrice = rs.getDouble(4);
+				toReturn.salePrice = rs.getDouble(5);
+				toReturn.quantity = rs.getInt(6);
+				toReturn.tax = rs.getDouble(7);
+				toReturn.providerID = rs.getInt(8);
+			} else {
+				System.out.println("No Item Found");
+				toReturn = null;
+			}
+			
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		
+		return toReturn;
 	}
 	
 }

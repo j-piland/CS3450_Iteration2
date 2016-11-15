@@ -6,10 +6,15 @@ import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+
+import cs3450.cardfunctions.CheckoutFunctions;
+import cs3450.resources.Item;
+import cs3450.resources.Receipt;
 
 public class ClerkCheckoutMenu extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -31,10 +36,10 @@ public class ClerkCheckoutMenu extends JPanel {
 	/**
 	 * Class Members
 	 */
-	private Vector<String> displayV = new Vector<String>(10,2);
-	private Vector<Integer> itemTracker = new Vector<Integer>(10,2);
-	private Vector<Integer> itemQuanity	= new Vector<Integer>(10,2);
-	private Vector<Double> itemPrice = new Vector<Double>(10,2);
+	private Vector<Item> itemList = new Vector<Item>(10,2);
+	private Receipt receipt;
+	
+	private CheckoutFunctions checkoutFunctions = new CheckoutFunctions();
 	
 	public ClerkCheckoutMenu(){
 		this.setLayout(new BorderLayout());
@@ -86,4 +91,20 @@ public class ClerkCheckoutMenu extends JPanel {
 	public JButton getCCbackButton(){
 		return CCbackButton;
 	}
+	
+	public void addItem(){
+		itemList = checkoutFunctions.addItem(itemList);
+		CCItemDisplay.setText(checkoutFunctions.display(itemList));
+	}
+	
+	public void removeItem(){
+		itemList = checkoutFunctions.removeItem(itemList);
+		CCItemDisplay.setText(checkoutFunctions.display(itemList));
+	}
+	
+	public void printReciept(){
+		checkoutFunctions.printReciept(itemList);
+		CCItemDisplay.setText("");
+	}
+	
 }

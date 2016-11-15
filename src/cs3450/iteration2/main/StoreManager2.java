@@ -56,12 +56,8 @@ public class StoreManager2 extends JFrame implements ActionListener, MouseListen
 	private ClerkMainMenuCard clerkMainMenuCard = new ClerkMainMenuCard();
 	private AdminCheckoutCard adminCheckoutCard = new AdminCheckoutCard();
 	private ClerkCheckoutMenu clerkCheckoutCard = new ClerkCheckoutMenu();
-<<<<<<< HEAD
 	private ClerkUpdateMenuCard	clerkUpdateMenuCard = new ClerkUpdateMenuCard();
-	
-=======
 
->>>>>>> origin/master
 	private AdminAccountDisplayCard adminAccountDisplayCard = new AdminAccountDisplayCard();
 	private AdminAccountNewCard adminAccountNewCard = new AdminAccountNewCard();
 	private AdminAccountUpdateCard adminAccountUpdateCard = new AdminAccountUpdateCard();
@@ -132,16 +128,12 @@ public class StoreManager2 extends JFrame implements ActionListener, MouseListen
 		clerkCheckoutCard.getCClogoutButton().addActionListener(this);
 		clerkCheckoutCard.getCCbackButton().addActionListener(this);
 		deck.add(clerkCheckoutCard, "clerkCheckoutCard");
-<<<<<<< HEAD
 		
 		clerkUpdateMenuCard.getCUupdateButton().addActionListener(this);
 		clerkUpdateMenuCard.getCUbackButton().addActionListener(this);
 		clerkUpdateMenuCard.getCUlogoutButton().addActionListener(this);
 		deck.add(clerkUpdateMenuCard, "clerkUpdateMenuCard");
 		
-=======
-
->>>>>>> origin/master
 		adminAccountDisplayCard.getAMbackButton().addActionListener(this);
 		adminAccountDisplayCard.getAMexecute().addActionListener(this);
 		deck.add(adminAccountDisplayCard, "adminAccountDisplayCard");
@@ -249,13 +241,13 @@ public class StoreManager2 extends JFrame implements ActionListener, MouseListen
 
 		// Admin Checkout Functions
 		if (e.getSource() == adminCheckoutCard.getACaddItemButton()) {
-
+			adminCheckoutCard.addItem();
 		}
 		if (e.getSource() == adminCheckoutCard.getACremoveItemButton()) {
-
+			adminCheckoutCard.removeItem();
 		}
 		if (e.getSource() == adminCheckoutCard.getACprintReceiptButton()) {
-
+			adminCheckoutCard.printReciept();
 		}
 		if (e.getSource() == adminCheckoutCard.getAClogoutButton()) {
 			cl.show(deck, "login");
@@ -266,13 +258,13 @@ public class StoreManager2 extends JFrame implements ActionListener, MouseListen
 
 		// Clerk Checkout Functions
 		if (e.getSource() == clerkCheckoutCard.getCCaddItemButton()) {
-
+			clerkCheckoutCard.addItem();
 		}
 		if (e.getSource() == clerkCheckoutCard.getCCremoveItemButton()) {
-
+			clerkCheckoutCard.removeItem();
 		}
 		if (e.getSource() == clerkCheckoutCard.getCCprintReceiptButton()) {
-
+			clerkCheckoutCard.printReciept();
 		}
 		if (e.getSource() == clerkCheckoutCard.getCCbackButton()) {
 			cl.show(deck, "clerkMainMenuCard");
@@ -280,17 +272,8 @@ public class StoreManager2 extends JFrame implements ActionListener, MouseListen
 		if (e.getSource() == clerkCheckoutCard.getCClogoutButton()) {
 			cl.show(deck, "login");
 		}
-<<<<<<< HEAD
 
 		// Admin Account Functions
-		if (e.getSource() == adminAccountDisplayCard.getAMbackButton()) {
-
-		}
-
-		if (e.getSource() == adminAccountDisplayCard.getAMexecute()) {
-
-		}
-
 		if (e.getSource() == inventoryDisplayCard.getIMbackButton()) {
 			cl.show(deck, "adminMainMenuCard");
 		}
@@ -303,8 +286,6 @@ public class StoreManager2 extends JFrame implements ActionListener, MouseListen
 				cl.show(deck, "inventoryUpdateCard");
 			}
 		}
-
-=======
 		
 		//Admin Account Functions
 		if(e.getSource()==adminAccountDisplayCard.getAMbackButton()){
@@ -362,8 +343,6 @@ public class StoreManager2 extends JFrame implements ActionListener, MouseListen
 		if(e.getSource()==adminAccountUpdateCard.getAUupdateButton()){
 			adminAccountUpdateCard.updateUser();
 		}
-		
-<<<<<<< HEAD
 		//Clerk Update Menu
 		if(e.getSource()==clerkUpdateMenuCard.getCUbackButton()){
 			cl.show(deck, "clerkMainMenuCard");
@@ -376,10 +355,6 @@ public class StoreManager2 extends JFrame implements ActionListener, MouseListen
 		if(e.getSource()==clerkUpdateMenuCard.getCUupdateButton()){
 			clerkUpdateMenuCard.changePassword();
 		}
-		
-=======
->>>>>>> origin/master
->>>>>>> origin/master
 	}
 
 	@Override

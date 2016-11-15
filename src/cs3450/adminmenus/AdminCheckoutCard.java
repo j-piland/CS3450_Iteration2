@@ -21,6 +21,8 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import cs3450.cardfunctions.CheckoutFunctions;
+import cs3450.resources.Item;
+import cs3450.resources.Receipt;
 
 public class AdminCheckoutCard extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -36,6 +38,8 @@ public class AdminCheckoutCard extends JPanel {
 	private JTextArea ACItemDisplay;
 	private JScrollPane ACScroll;
 	
+	private Vector<Item> itemList = new Vector<Item>(10,2);
+	private Receipt receipt;
 	
 	private CheckoutFunctions checkoutFunctions = new CheckoutFunctions();
 	
@@ -90,31 +94,19 @@ public class AdminCheckoutCard extends JPanel {
 		return AClogoutButton;
 	}
 	
-	public void display(){
-		
-		//ACItemDisplay.setText(checkoutFunctions.display());
-	}
-	
 	public void addItem(){
-		Integer itemId = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Item ID: ","Temporary Test Feature", JOptionPane.QUESTION_MESSAGE));
-		Integer quantity = Integer.parseInt(JOptionPane.showInputDialog(null, "How many: ","Temporary Test Feature", JOptionPane.QUESTION_MESSAGE));
-		
-		//checkoutFunctions.addItem(itemId, quantity);
-		
-		display();
+		itemList = checkoutFunctions.addItem(itemList);
+		ACItemDisplay.setText(checkoutFunctions.display(itemList));
 	}
 	
 	public void removeItem(){
-		int itemId = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Item ID: ","Temporary Test Feature", JOptionPane.QUESTION_MESSAGE));
-		int quantity = Integer.parseInt(JOptionPane.showInputDialog(null, "How many: ","Temporary Test Feature", JOptionPane.QUESTION_MESSAGE));
-		
-		//checkoutFunctions.removeItem(itemId, quantity);
-		
-		display();
+		itemList = checkoutFunctions.removeItem(itemList);
+		ACItemDisplay.setText(checkoutFunctions.display(itemList));
 	}
 	
-	public void printReceipt(){
-		//checkoutFunctions.printReceipt
+	public void printReciept(){
+		checkoutFunctions.printReciept(itemList);
+		ACItemDisplay.setText("");
 	}
 
 }

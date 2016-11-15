@@ -3,6 +3,7 @@ package cs3450.databases;
 import java.sql.Connection;
 import java.util.Vector;
 
+import cs3450.resources.Item;
 import cs3450.resources.User;
 
 public class DatabaseAdapter implements DatabaseReader {
@@ -52,6 +53,14 @@ public class DatabaseAdapter implements DatabaseReader {
 		if(databaseType.equalsIgnoreCase("sql")){
 			advDatabaseReader.addUserSQL(databaseType, db, toAdd);
 		}
+	}
+	
+	@Override
+	public Item getItem(String databaseType, Connection db, int productID){
+		if(databaseType.equalsIgnoreCase("sql")){
+			return advDatabaseReader.getItemSQL(databaseType, db, productID);
+		}
+		return null;
 	}
 
 }
