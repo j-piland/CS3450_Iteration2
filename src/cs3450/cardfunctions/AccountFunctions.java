@@ -22,13 +22,13 @@ public class AccountFunctions {
 		toProcess = databaseHandler.getAllUsersSQL("SQL", global.database);
 		
 		if(toProcess != null){
-			for(User user : toProcess){
-				results +=   "Employee: " + user.name + "\n" +
-							"Store ID Number: " + user.ID + "\n" +
-							"Status: " + user.status + "\n" +
-							"Username: " + user.username + "\n" + 
-							"Phone: " + user.phone + "\n" +
-							"Address: " + user.address + "\n\n";
+			for(int c=0; c<toProcess.size(); c++){
+				results +=   "Employee: " + toProcess.get(c).name + "\n" +
+							"Store ID Number: " + toProcess.get(c).ID + "\n" +
+							"Status: " + toProcess.get(c).status + "\n" +
+							"Username: " + toProcess.get(c).username + "\n" + 
+							"Phone: " + toProcess.get(c).phone + "\n" +
+							"Address: " + toProcess.get(c).address + "\n\n";
 			}
 		}else{
 			results = "No Users to Display.";

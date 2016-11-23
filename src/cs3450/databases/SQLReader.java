@@ -118,6 +118,8 @@ public class SQLReader implements AdvDatabaseReader{
 					temp.currentPassword = 	rs.getString(CURRENTPASSWORD);
 				
 					toReturn.addElement(temp);
+					
+					System.out.println("1 user get");
 				}while(rs.next());
 			}else{
 				System.out.println("No users in database.");
@@ -140,7 +142,7 @@ public class SQLReader implements AdvDatabaseReader{
 			Statement st = db.createStatement();
 			
 			if((JOptionPane.showConfirmDialog(null, "Are you sure you want to delete user: " + ID + "?", "Delete Warning", JOptionPane.OK_CANCEL_OPTION))==JOptionPane.OK_OPTION){
-				st.executeUpdate("DELETE FROM users * WHERE storeid = \'" + ID +"\'");
+				st.executeUpdate("DELETE FROM users * WHERE id = \'" + ID +"\'");
 				db.commit();
 				JOptionPane.showMessageDialog(null, "User has been deleted", "User Deleted", JOptionPane.WARNING_MESSAGE);
 				//st.executeUpdate("DELETE FROM passwords * WHERE name = \'" + ID + "\'");
@@ -158,7 +160,7 @@ public class SQLReader implements AdvDatabaseReader{
 	}
 	
 	public void addUserSQL(String databaseType, Connection db, User toAdd){
-		String searcher = "INSERT INTO userinfo (id, username, status, name, address, phone, currentpassword) VALUES (\'" + toAdd.ID
+		String searcher = "INSERT INTO users (id, username, status, name, address, phone, currentpassword) VALUES (\'" + toAdd.ID
 				+ "\', \'" + toAdd.username + "\', \'" + toAdd.status + "\', \'" +
 				toAdd.name + "\', \'" + toAdd.address + "\', \'" + toAdd.phone + "\', \'" + toAdd.currentPassword + "\')";
 		try {
