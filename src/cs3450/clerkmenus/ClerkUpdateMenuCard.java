@@ -77,7 +77,7 @@ public class ClerkUpdateMenuCard extends JPanel {
 	@SuppressWarnings("static-access")
 	public void changePassword(){
 		if(CUupdateFeild.getText().equals(CUupdateFeild2.getText())){
-			databaseHandler.deleteUserByID("sql", global.database, global.currentUser.ID);
+			databaseHandler.deleteUserByID("sql", global.database, global.currentUser.ID, 1);
 			global.currentUser.currentPassword=CUupdateFeild.getText();
 			databaseHandler.addUserSQL("sql", global.database, global.currentUser);
 			JOptionPane.showMessageDialog(null, "Password Changed","Change", JOptionPane.PLAIN_MESSAGE);

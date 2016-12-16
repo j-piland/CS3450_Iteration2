@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -37,6 +38,7 @@ public class AdminCheckoutCard extends JPanel {
 	private JButton AClogoutButton;
 	private JTextArea ACItemDisplay;
 	private JScrollPane ACScroll;
+	private JButton ACfromReciept;
 	
 	private Vector<Item> itemList = new Vector<Item>(10,2);
 	private Receipt receipt;
@@ -49,10 +51,12 @@ public class AdminCheckoutCard extends JPanel {
 		title = new JLabel("Checkout Item Display", SwingConstants.CENTER);
 		
 		leftBar = new JPanel();
-		leftBar.setLayout(new GridLayout(2,1,0,100));
+		leftBar.setLayout(new GridLayout(3,1,0,100));
 		CCaddItemButton = new JButton("Add");
+		ACfromReciept = new JButton("Online Order");
 		CCremoveItemButton = new JButton("Remove");
 		leftBar.add(CCaddItemButton);
+		leftBar.add(ACfromReciept);
 		leftBar.add(CCremoveItemButton);
 		
 		bottomBar = new JPanel();
@@ -104,9 +108,17 @@ public class AdminCheckoutCard extends JPanel {
 		ACItemDisplay.setText(checkoutFunctions.display(itemList));
 	}
 	
+	public void onlineOrder(){
+		checkoutFunctions.onlineOrder();
+	}
+	
 	public void printReciept(){
 		checkoutFunctions.printReciept(itemList);
 		ACItemDisplay.setText("");
+	}
+
+	public JButton getACfromRecieptButton() {
+		return ACfromReciept;
 	}
 
 }

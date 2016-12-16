@@ -73,7 +73,7 @@ public class StoreManager2 extends JFrame implements ActionListener, MouseListen
 	@SuppressWarnings("static-access")
 	public StoreManager2() {
 
-		global.database = databaseHandler.connect("SQL", "jdbc:postgresql:iteration_2", "postgres", "123");
+		global.database = databaseHandler.connect("SQL", "jdbc:postgresql:iteration3", "postgres", "123");
 
 		global.currentUser = new User();
 		global.currentUser.status = "none";
@@ -120,6 +120,7 @@ public class StoreManager2 extends JFrame implements ActionListener, MouseListen
 		adminCheckoutCard.getAClogoutButton().addActionListener(this);
 		adminCheckoutCard.getACremoveItemButton().addActionListener(this);
 		adminCheckoutCard.getACprintReceiptButton().addActionListener(this);
+		adminCheckoutCard.getACfromRecieptButton().addActionListener(this);
 		deck.add(adminCheckoutCard, "adminCheckoutCard");
 
 		clerkCheckoutCard.getCCaddItemButton().addActionListener(this);
@@ -127,6 +128,7 @@ public class StoreManager2 extends JFrame implements ActionListener, MouseListen
 		clerkCheckoutCard.getCCprintReceiptButton().addActionListener(this);
 		clerkCheckoutCard.getCClogoutButton().addActionListener(this);
 		clerkCheckoutCard.getCCbackButton().addActionListener(this);
+		clerkCheckoutCard.getCCfromReceiptButton().addActionListener(this);
 		deck.add(clerkCheckoutCard, "clerkCheckoutCard");
 		
 		clerkUpdateMenuCard.getCUupdateButton().addActionListener(this);
@@ -255,6 +257,9 @@ public class StoreManager2 extends JFrame implements ActionListener, MouseListen
 		if (e.getSource() == adminCheckoutCard.getACbackButton()) {
 			cl.show(deck, "adminMainMenuCard");
 		}
+		if(e.getSource() == adminCheckoutCard.getACfromRecieptButton()){
+			adminCheckoutCard.onlineOrder();
+		}
 
 		// Clerk Checkout Functions
 		if (e.getSource() == clerkCheckoutCard.getCCaddItemButton()) {
@@ -271,6 +276,9 @@ public class StoreManager2 extends JFrame implements ActionListener, MouseListen
 		}
 		if (e.getSource() == clerkCheckoutCard.getCClogoutButton()) {
 			cl.show(deck, "login");
+		}
+		if(e.getSource()==clerkCheckoutCard.getCCfromReceiptButton()){
+			clerkCheckoutCard.onlineOrder();
 		}
 
 		// Admin Account Functions

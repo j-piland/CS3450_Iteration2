@@ -60,6 +60,7 @@ public class SQLReader implements AdvDatabaseReader{
 			toSearch = "username";
 			searchValue = username;
 		}else{
+			System.out.println("this worked");
 			toSearch = "ID";
 			searchValue = ID;
 		}
@@ -109,6 +110,7 @@ public class SQLReader implements AdvDatabaseReader{
 			
 			if (rs.next()){
 				do{
+					temp = new User();
 					temp.ID =				rs.getString(STOREID);
 					temp.username =			rs.getString(USERNAME);
 					temp.status =			rs.getString(STATUS);
@@ -117,9 +119,10 @@ public class SQLReader implements AdvDatabaseReader{
 					temp.phone = 			rs.getString(PHONE);
 					temp.currentPassword = 	rs.getString(CURRENTPASSWORD);
 				
+					
+					
 					toReturn.addElement(temp);
 					
-					System.out.println("1 user get");
 				}while(rs.next());
 			}else{
 				System.out.println("No users in database.");
@@ -133,20 +136,24 @@ public class SQLReader implements AdvDatabaseReader{
 		return toReturn;
 	}
 	
-	public Vector<User> deleteUserByID(String databaseType, Connection db, String ID){
+	public Vector<User> deleteUserByID(String databaseType, Connection db, String ID, int i){
 		Vector<User> toReturn = new Vector<User>();
 		
 		try {
 			db.setAutoCommit(false);
 			
 			Statement st = db.createStatement();
-			
-			if((JOptionPane.showConfirmDialog(null, "Are you sure you want to delete user: " + ID + "?", "Delete Warning", JOptionPane.OK_CANCEL_OPTION))==JOptionPane.OK_OPTION){
+			if ( i != 1){
+				if((JOptionPane.showConfirmDialog(null, "Are you sure you want to delete user: " + ID + "?", "Delete Warning", JOptionPane.OK_CANCEL_OPTION))==JOptionPane.OK_OPTION){
+					st.executeUpdate("DELETE FROM users * WHERE id = \'" + ID +"\'");
+					db.commit();
+					JOptionPane.showMessageDialog(null, "User has been deleted", "User Deleted", JOptionPane.WARNING_MESSAGE);
+					//st.executeUpdate("DELETE FROM passwords * WHERE name = \'" + ID + "\'");
+					//db.commit();
+				}
+			}else{
 				st.executeUpdate("DELETE FROM users * WHERE id = \'" + ID +"\'");
 				db.commit();
-				JOptionPane.showMessageDialog(null, "User has been deleted", "User Deleted", JOptionPane.WARNING_MESSAGE);
-				//st.executeUpdate("DELETE FROM passwords * WHERE name = \'" + ID + "\'");
-				//db.commit();
 			}
 			
 			toReturn = getAllUsersSQL(databaseType, db);

@@ -41,9 +41,9 @@ public class DatabaseAdapter implements DatabaseReader {
 	}
 	
 	@Override
-	public Vector<User> deleteUserByID(String databaseType, Connection db, String ID){
+	public Vector<User> deleteUserByID(String databaseType, Connection db, String ID, int i){
 		if(databaseType.equalsIgnoreCase("sql")){
-			return advDatabaseReader.deleteUserByID(databaseType, db, ID);
+			return advDatabaseReader.deleteUserByID(databaseType, db, ID, i);
 		}
 		return null;
 	}

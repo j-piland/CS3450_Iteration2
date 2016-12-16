@@ -33,6 +33,7 @@ public class ClerkCheckoutMenu extends JPanel {
 	private JButton CClogoutButton;
 	private JTextArea CCItemDisplay;
 	private JScrollPane CCScroll;
+	private JButton CCfromReciept;
 	/**
 	 * Class Members
 	 */
@@ -47,10 +48,12 @@ public class ClerkCheckoutMenu extends JPanel {
 		title = new JLabel("Checkout Item Display", SwingConstants.CENTER);
 		
 		leftBar = new JPanel();
-		leftBar.setLayout(new GridLayout(2,1,0,100));
+		leftBar.setLayout(new GridLayout(3,1,0,100));
 		CCaddItemButton = new JButton("Add");
+		CCfromReciept = new JButton("Online Order");
 		CCremoveItemButton = new JButton("Remove");
 		leftBar.add(CCaddItemButton);
+		leftBar.add(CCfromReciept);
 		leftBar.add(CCremoveItemButton);
 		
 		bottomBar = new JPanel();
@@ -88,6 +91,10 @@ public class ClerkCheckoutMenu extends JPanel {
 		return CClogoutButton;
 	}
 	
+	public JButton getCCfromReceiptButton(){
+		return CCfromReciept;
+	}
+	
 	public JButton getCCbackButton(){
 		return CCbackButton;
 	}
@@ -100,6 +107,10 @@ public class ClerkCheckoutMenu extends JPanel {
 	public void removeItem(){
 		itemList = checkoutFunctions.removeItem(itemList);
 		CCItemDisplay.setText(checkoutFunctions.display(itemList));
+	}
+	
+	public void onlineOrder(){
+		checkoutFunctions.onlineOrder();
 	}
 	
 	public void printReciept(){

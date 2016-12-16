@@ -23,6 +23,7 @@ public class AccountFunctions {
 		
 		if(toProcess != null){
 			for(int c=0; c<toProcess.size(); c++){
+			
 				results +=   "Employee: " + toProcess.get(c).name + "\n" +
 							"Store ID Number: " + toProcess.get(c).ID + "\n" +
 							"Status: " + toProcess.get(c).status + "\n" +
@@ -77,7 +78,7 @@ public class AccountFunctions {
 		String results = "";
 		Vector<User> toProcess = new Vector<User>();
 		
-		toProcess = databaseHandler.deleteUserByID("sql", global.database, ID);
+		toProcess = databaseHandler.deleteUserByID("sql", global.database, ID, 0);
 		
 		for(User user : toProcess){
 			results +=   "Employee: " + user.name + "\n" +
@@ -102,15 +103,19 @@ public class AccountFunctions {
 		
 		toReplace = databaseHandler.getUser("sql", global.database, null, toUp.getAUsearch());
 		
-		if(toUp.getCBID() != null){
+		if(toUp.getCBID().isSelected() == true){
 			temp.ID=toUp.getTID();
+			System.out.println("updated");
 		}else{
+			System.out.println("not updated");
 			temp.ID=toReplace.ID;
 		}
 		
-		if(toUp.getCBUser() != null){
+		if(toUp.getCBUser().isSelected() == true){
 			temp.username=toUp.getTUsername();
+			System.out.println("updated");
 		}else{
+			System.out.println("not updated");
 			temp.username=toReplace.username;
 		}
 		
@@ -118,35 +123,45 @@ public class AccountFunctions {
 			temp.status = "admin";
 		}else if(toUp.getcbg().getSelectedCheckbox()==toUp.getClerk()){
 			temp.status = "clerk";
+			System.out.println("updated");
 		}else{
+			System.out.println("not updated");
 			temp.status=toReplace.status;
 		}
 		
-		if(toUp.getCBName() != null){
+		if(toUp.getCBName().isSelected() == true){
 			temp.name = toUp.getTName();
+			System.out.println("updated");
 		}else{
+			System.out.println("not updated");
 			temp.name = toReplace.name;
 		}
 		
-		if(toUp.getCBAddress() != null){
+		if(toUp.getCBAddress().isSelected() == true){
 			temp.address=toUp.getTAddress();
+			System.out.println("updated");
 		}else{
+			System.out.println("not updated");
 			temp.address=toReplace.address;
 		}
 		
-		if(toUp.getCBPhone() != null){
+		if(toUp.getCBPhone().isSelected() == true){
 			temp.phone=toUp.getTPhone();
+			System.out.println("updated");
 		}else{
+			System.out.println("not updated");
 			temp.phone=toReplace.phone;
 		}
 		
-		if(toUp.getCBPassword() != null){
+		if(toUp.getCBPassword().isSelected() == true){
 			temp.currentPassword=toUp.getTPassword();
+			System.out.println("updated");
 		}else{
+			System.out.println("not updated");
 			temp.currentPassword=toReplace.currentPassword;
 		}
 		
-		databaseHandler.deleteUserByID("sql", global.database, toReplace.ID);
+		databaseHandler.deleteUserByID("sql", global.database, toReplace.ID, 1);
 		
 		databaseHandler.addUserSQL("sql", global.database, temp);
 		

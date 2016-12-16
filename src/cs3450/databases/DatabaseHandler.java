@@ -38,10 +38,10 @@ public class DatabaseHandler implements DatabaseReader {
 	}
 	
 	@Override
-	public Vector<User> deleteUserByID(String databaseType, Connection db, String ID){
+	public Vector<User> deleteUserByID(String databaseType, Connection db, String ID, int i){
 		if(databaseType.equalsIgnoreCase("sql")){
 			databaseAdapter = new DatabaseAdapter("sql");
-			return databaseAdapter.deleteUserByID(databaseType, db, ID);
+			return databaseAdapter.deleteUserByID(databaseType, db, ID, i);
 		}
 		return null;
 	}

@@ -111,5 +111,14 @@ public class CheckoutFunctions {
 		}
 		
 	}
+
+
+	public void onlineOrder() {
+		JOptionPane.showInputDialog(null, "Input Customer Name: ", "Test Feature - Online Order", 0);
+		
+		//get receipt from data - currently undoable due to php.
+		
+		JOptionPane.showMessageDialog(null, "Cannot be found as the function is incomplete");
+	}
 	
 }
